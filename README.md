@@ -1,3 +1,7 @@
+# Music Library
+
+_**This is a music library system that uses PostgreSQL to store data on albums & artists.**_
+
 This project will use a few components:
 
 * **Ruby and RSpec**  
