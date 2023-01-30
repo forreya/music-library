@@ -1,6 +1,6 @@
 # Music Library
 
-_**This is a music library system that uses PostgreSQL to store data on albums & artists.**_
+_**This is a music library system that uses PostgreSQL to store, update, delete & display data on various albums & artists.**_
 
 This project will use a few components:
 

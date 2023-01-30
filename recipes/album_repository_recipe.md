@@ -8,10 +8,10 @@ If the table is already created in the database, skip this step.
 
 # EXAMPLE
 
-Table: artists
+Table: albums
 
 Columns:
-id | name | genre
+id | title | release_year | artist_id
 
 ## 2. Create Test SQL seeds
 
@@ -26,13 +26,13 @@ If seed data is already created, skip this step.
 -- so we can start with a fresh state.
 -- (RESTART IDENTITY resets the primary key)
 
-TRUNCATE TABLE artists RESTART IDENTITY; -- replace with your own table name.
+TRUNCATE TABLE albums RESTART IDENTITY; -- replace with your own table name.
 
 -- Below this line there should only be `INSERT` statements.
 -- Replace these statements with your own seed data.
 
-INSERT INTO artists (name,genre) VALUES('Kinneret','Bedroom Pop');
-INSERT INTO artists (name,genre) VALUES('Teresa Teng','Chinese Pop');
+INSERT INTO albums (title, release_year, artist_id) VALUES ('DMZ', '2019', '1');
+INSERT INTO albums (title, release_year, artist_id) VALUES ('Goodbye My Love', '1975', '2');
 ```
 
 Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.
@@ -45,16 +45,16 @@ psql -h 127.0.0.1 your_database_name < seeds_{table_name}.sql
 
 ```ruby
 # EXAMPLE
-# Table name: artists
+# Table name: albums
 
 # Model class
-# (in lib/artist.rb)
-class Artist
+# (in lib/album.rb)
+class Album
 end
 
 # Repository class
-# (in lib/artist_repository.rb)
-class ArtistRepository
+# (in lib/album_repository.rb)
+class AlbumRepository
 end
 ```
 
@@ -64,24 +64,23 @@ Define the attributes of your Model class. You can usually map the table columns
 
 ```ruby
 # EXAMPLE
-# Table name: artists
+# Table name: albums
 
 # Model class
-# (in lib/artist.rb)
+# (in lib/album.rb)
 
-class Artist
+class Album
 
-  # Replace the attributes by your own columns.
-  attr_accessor :id, :name, :genre
+  attr_accessor :id, :title, :release_year, :artist_id
 end
 
 # The keyword attr_accessor is a special Ruby feature
 # which allows us to set and get attributes on an object,
 # here's an example:
 #
-# artist = Artist.new
-# artist.name = 'ForReya'
-# artist.name
+# album = Album.new
+# album.name = 'Tha Carter IV'
+# album.name
 ```
 
 *You may choose to test-drive this class, but unless it contains any more logic than the example above, it is probably not needed.*
@@ -94,20 +93,20 @@ Using comments, define the method signatures (arguments and return value) and wh
 
 ```ruby
 # EXAMPLE
-# Table name: artists
+# Table name: albums
 
 # Repository class
-# (in lib/artist_repository.rb)
+# (in lib/album_repository.rb)
 
-class ArtistRepository
+class AlbumRepository
 
   # Selecting all records
   # No arguments
   def all
     # Executes the SQL query:
-    # SELECT id, name, genre FROM artists;
+    # SELECT id, title, release_year, artist_id FROM albums;
 
-    # Returns an array of Artist objects.
+    # Returns an array of Album objects.
   end
 
 end
@@ -123,14 +122,14 @@ These examples will later be encoded as RSpec tests.
 # EXAMPLES
 
 # 1
-# Get all artists
+# Get all albums
 
-repo = ArtistRepository.new
+repo = AlbumRepository.new
 
-artists = repo.all
-artists.length # => 2
-artists.first.id # => '1'
-artists.first.name # => 'Kinneret'
+albums = repo.all
+albums.length # => 2
+albums.first.id # => '1'
+albums.first.name # => 'DMZ'
 ```
 
 Encode this example as a test.
@@ -144,16 +143,16 @@ This is so you get a fresh table contents every time you run the test suite.
 ```ruby
 # EXAMPLE
 
-# file: spec/artist_repository_spec.rb
+# file: spec/album_repository_spec.rb
 
-  def reset_artists_table
-    seed_sql = File.read('seeds/seeds_artists.sql')
+  def reset_albums_table
+    seed_sql = File.read('seeds/seeds_albums.sql')
     connection = PG.connect({ host: '127.0.0.1', dbname: 'music_library_test' })
     connection.exec(seed_sql)
   end
 
   before(:each) do
-    reset_artists_table
+    reset_albums_table
   end
   
   # (your tests will go here).
