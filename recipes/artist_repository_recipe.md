@@ -33,6 +33,7 @@ TRUNCATE TABLE artists RESTART IDENTITY; -- replace with your own table name.
 
 INSERT INTO artists (name,genre) VALUES('Kinneret','Bedroom Pop');
 INSERT INTO artists (name,genre) VALUES('Teresa Teng','Pop');
+INSERT INTO artists (name,genre) VALUES('Trippie Redd','Rap');
 ```
 
 Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.

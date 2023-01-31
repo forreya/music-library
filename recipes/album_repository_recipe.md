@@ -116,6 +116,13 @@ class AlbumRepository
     # Returns the Album objects that corresponds to the id.  
   end
 
+  def create(new_album)
+    # Executes the SQL query:
+    # INSERT INTO albums (title, release_year, artist_id) VALUES ($1, $2, $3);
+
+    # Returns nothing
+    # Adds a new record to the albums table
+  end
 end
 ```
 
@@ -147,6 +154,22 @@ album.id # => '1'
 album.title # => 'DMZ'
 album.release_year # => '2019'
 album.artist_id # => '1'
+
+# 3
+# Creates an Album object and pushes it to the albums table
+repo = AlbumRepository.new
+album = Album.new
+
+album.title = "A Love Letter To You 4"
+album.release_year = "2019"
+album.artist_id = "3"
+
+repo.create(album)
+
+all_albums = repo.all
+all_albums.last.title # => "A Love Letter To You 4"
+all_albums.last.release_year # => '2019'
+all_albums.last.artist_id # => '3'
 ```
 
 Encode this example as a test.
