@@ -6,7 +6,7 @@ class AlbumRepository
     result_set = DatabaseConnection.exec_params(sql,[])
 
     albums = []
-
+    
     result_set.each{
       |record|
       album = Album.new
