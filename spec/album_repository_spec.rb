@@ -21,4 +21,15 @@ describe AlbumRepository do
     expect(albums.first.title).to eq 'DMZ'
   end
 
+  it 'returns an album based on a given id' do
+    repo = AlbumRepository.new
+    album = repo.find(1)
+
+    expect(album.id).to eq '1'
+    expect(album.title).to eq 'DMZ'
+    expect(album.release_year).to eq '2019'
+    expect(album.artist_id).to eq '1'
+
+  end
+
 end

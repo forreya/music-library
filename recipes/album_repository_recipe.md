@@ -32,7 +32,7 @@ TRUNCATE TABLE albums RESTART IDENTITY; -- replace with your own table name.
 -- Replace these statements with your own seed data.
 
 INSERT INTO albums (title, release_year, artist_id) VALUES ('DMZ', '2019', '1');
-INSERT INTO albums (title, release_year, artist_id) VALUES ('Goodbye My Love', '1975', '2');
+INSERT INTO albums (title, release_year, artist_id) VALUES ('一封情書', '1979', '2');
 ```
 
 Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.
@@ -109,6 +109,13 @@ class AlbumRepository
     # Returns an array of Album objects.
   end
 
+  def find(id)
+    # Executes the SQL query:
+    # SELECT id, title, release_year, artist_id FROM albums WHERE id = $1;
+
+    # Returns the Album objects that corresponds to the id.  
+  end
+
 end
 ```
 
@@ -130,6 +137,16 @@ albums = repo.all
 albums.length # => 2
 albums.first.id # => '1'
 albums.first.name # => 'DMZ'
+
+# 2
+# Find a singular album using the id
+repo = AlbumRepository.new
+album = repo.find(1)[0]
+
+album.id # => '1'
+album.title # => 'DMZ'
+album.release_year # => '2019'
+album.artist_id # => '1'
 ```
 
 Encode this example as a test.

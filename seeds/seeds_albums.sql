@@ -10,4 +10,4 @@ TRUNCATE TABLE albums RESTART IDENTITY; -- replace with your own table name.
 -- Replace these statements with your own seed data.
 
 INSERT INTO albums (title, release_year, artist_id) VALUES ('DMZ', '2019', '1');
-INSERT INTO albums (title, release_year, artist_id) VALUES ('Goodbye My Love', '1975', '2');
+INSERT INTO albums (title, release_year, artist_id) VALUES ('一封情書', '1979', '2');
