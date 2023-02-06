@@ -13,7 +13,7 @@ _**This is a music library system that uses PostgreSQL to store, update, delete 
 
 ## How to use:
 
-### Create the 'music_library' database on your system
+#### Create the 'music_library' database on your system
 
 ```
 $ cd music-library
@@ -21,13 +21,13 @@ $ psql -h 127.0.0.1
 $ CREATE DATABASE music_library
 ```
 
-### Seed the 'music_library' database
+#### Seed the 'music_library' database
 
 ```
 $ psql -h 127.0.0.1 music_library < ./seeds/music_database.sql
 ```
 
-### Run the app
+#### Run the app
 
 ```
 $ ruby app.rb
